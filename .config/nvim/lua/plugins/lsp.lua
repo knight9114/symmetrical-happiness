@@ -99,6 +99,14 @@ return {
                 desc = "Next quickfix item",
             }
         },
+        init = function()
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>x"] = {
+                    name = "+trouble"
+                }
+            })
+        end,
     },
     {
         "L3MON4D3/LuaSnip",
@@ -151,8 +159,8 @@ return {
                 sorting = defaults.sorting,
             }
         end,
-        config = function()
-            require("cmp").setup()
+        config = function(_, opts)
+            require("cmp").setup(opts)
         end,
     },
     {
@@ -162,6 +170,29 @@ return {
             { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
             { "folke/neodev.nvim", opts = {} },
         },
+        init = function()
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>l"] = {
+                    name = "+lsp",
+                    D = "LSP Declaration",
+                    d = "LSP Definition",
+                    K = "LSP Hover",
+                    i = "LSP Implementation",
+                    k = "LSP Signature",
+                    t = "LSP Type definition",
+                    r = "LSP Rename symbol",
+                    c = "LSP Code action",
+                    R = "LSP References",
+                },
+                ["<leader>lw"] = {
+                    name = "+workspace",
+                    a = "LSP Add workspace",
+                    r = "LSP Remove workspace",
+                    l = "LSP List workspaces",
+                },
+            })
+        end,
         config = function()
             local lspconfig = require("lspconfig")
             lspconfig.pylsp.setup({
@@ -196,9 +227,9 @@ return {
                     vim.keymap.set("n", "<leader>lwl", function()
                         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
                     end, { buffer = ev.buf, desc = "LSP List workspaces" })
-                    vim.keymap.set("n", "<leader>ltd", vim.lsp.buf.type_definition, { buffer = ev.buf, desc = "LSP Type definition" })
+                    vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition, { buffer = ev.buf, desc = "LSP Type definition" })
                     vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { buffer = ev.buf, desc = "LSP Rename" })
-                    vim.keymap.set({ "n", "v" }, "<leader>lca", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "LSP Code action" })
+                    vim.keymap.set({ "n", "v" }, "<leader>lc", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "LSP Code action" })
                     vim.keymap.set("n", "<leader>lR", vim.lsp.buf.references, { buffer = ev.buf, desc = "LSP References" })
                 end,
             })

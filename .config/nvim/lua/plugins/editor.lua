@@ -14,8 +14,16 @@ return {
             "nvim-tree/nvim-web-devicons",
         },
         keys = {
-            { "<leader>n", function() require("mini.files").open() end, desc = "Open file explorer" },
+            { "<leader>m", function() require("mini.files").open() end, desc = "Open file explorer" },
         },
+        init = function()
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>"] = {
+                    m = "+mini.files",
+                }
+            })
+        end,
         config = function()
             require("mini.files").setup({
                 options = {
@@ -63,6 +71,14 @@ return {
             { "<leader>ht3", function() require("harpoon.term").gotoTerminal(3) end, desc = "Harpoon terminal 3" },
             { "<leader>ht4", function() require("harpoon.term").gotoTerminal(4) end, desc = "Harpoon terminal 4" },
         },
+        init = function()
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>h"] = {
+                    name = "+harpoon",
+                },
+            })
+        end,
         config = function()
             require("harpoon").setup({
                 global_settings = {
@@ -76,6 +92,7 @@ return {
     {
         "nvim-telescope/telescope.nvim",
         cmd = { "Telescope" },
+        event = { "VeryLazy" },
         version = false,
         keys = {
             { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
@@ -85,6 +102,15 @@ return {
             { "<leader>fli", "<cmd>Telescope lsp_incoming_calls<cr>", desc = "LSP incoming calls" },
             { "<leader>flo", "<cmd>Telescope lsp_outgoing_calls<cr>", desc = "LSP outgoing calls" },
         },
+        init = function()
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>f"] = {
+                    name = "+telescope",
+                    l = "+lsp",
+                }
+            })
+        end,
         config = function()
             require("telescope").setup()
         end,
@@ -107,10 +133,10 @@ return {
             "rcarriga/nvim-notify",
         },
         keys = {
-            { "<leader>snl", function() require("noice").cmd("last") end, desc = "Noice last message" },
-            { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice history" },
-            { "<leader>sna", function() require("noice").cmd("all") end, desc = "All noice messages" },
-            { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss noice messages" },
+            { "<leader>nl", function() require("noice").cmd("last") end, desc = "Noice last message" },
+            { "<leader>nh", function() require("noice").cmd("history") end, desc = "Noice history" },
+            { "<leader>na", function() require("noice").cmd("all") end, desc = "All noice messages" },
+            { "<leader>nd", function() require("noice").cmd("dismiss") end, desc = "Dismiss noice messages" },
         },
         opts = {
             lsp = {
@@ -132,7 +158,15 @@ return {
                 inc_rename = false,
                 lsp_doc_border = false,
             },
-        }
+        },
+        init = function()
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>n"] = {
+                    name = "+noice",
+                }
+            })
+        end,
     },
     {
         "stevearc/dressing.nvim",

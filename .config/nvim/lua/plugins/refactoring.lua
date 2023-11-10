@@ -20,6 +20,14 @@ return {
                 desc = "Select refactoring",
             },
         },
+        init = function()
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>r"] = {
+                    name = "+refactoring"
+                }
+            })
+        end,
         config = function()
             require("refactoring").setup({
                 prompt_func_return_type = {

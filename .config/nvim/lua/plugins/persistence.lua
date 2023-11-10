@@ -32,5 +32,13 @@ return {
                 desc = "Don't save current session"
             },
         },
+        init = function()
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>q"] = {
+                    name = "+persistence"
+                }
+            })
+        end,
     },
 }

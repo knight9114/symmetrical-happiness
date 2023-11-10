@@ -20,15 +20,23 @@ return {
         version = false,
         opts = {
             mappings = {
-                add = "gsa",
-                delete = "gsd",
-                find = "gsf",
-                find_left = "gsF",
-                highlight = "gsh",
-                replace = "gsr",
-                update_n_lines = "gsn",
+                add = "<leader>sa",
+                delete = "<leader>sd",
+                find = "<leader>sf",
+                find_left = "<leader>sF",
+                highlight = "<leader>sh",
+                replace = "<leader>sr",
+                update_n_lines = "<leader>sn",
             },
         },
+        config = function(_, opts)
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>s"] = {
+                    name = "+mini.surround",
+                }
+            })
+        end,
     },
     {
         "echasnovski/mini.comment",

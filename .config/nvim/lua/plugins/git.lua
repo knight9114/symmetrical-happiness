@@ -16,5 +16,13 @@ return {
             { "<leader>Gp", "<cmd>Git pull<cr>", desc = "Git pull" },
             { "<leader>GP", "<cmd>Git push<cr>", desc = "Git push" },
         },
+        config = function()
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>G"] = {
+                    name = "+git",
+                }
+            })
+        end,
     },
 }
